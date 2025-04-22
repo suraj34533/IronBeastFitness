@@ -1,125 +1,66 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ muscle_group|capitalize }} Exercises - IronBeast Gym{% endblock %}
+{% block title %}{{ muscle_group.title() }} Exercises | IronBeast{% endblock %}
 
 {% block content %}
-    <!-- Muscle Group Header -->
-    <div class="bg-gray-900 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-center golden-text mb-2">{{ muscle_group|upper }} EXERCISES</h1>
-            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
-                Specialized exercises targeting your {{ muscle_group }} muscles for optimal growth and strength.
-            </p>
-        </div>
-    </div>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6 golden-gradient text-center">{{ muscle_group.title() }} Exercises</h1>
     
-    <!-- Muscle Group Content -->
-    <div class="bg-black py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Featured Plans with this Muscle Group -->
-            {% if plans %}
-                <div class="mb-12">
-                    <h2 class="text-2xl font-bold golden-text mb-6">Training Plans for {{ muscle_group|capitalize }}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {% for plan in plans %}
-                            <a href="{{ url_for('exercise_plan_detail', plan_id=plan.id, muscle_group=muscle_group) }}" class="golden-card rounded-lg overflow-hidden transition-transform duration-200 hover:scale-105">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-bold text-gold-500 mb-2">{{ plan.name }}</h3>
-                                    <div class="flex items-center mb-2">
-                                        <span class="bg-gold-700 text-white text-xs px-2 py-1 rounded">{{ plan.category|capitalize }}</span>
-                                        <span class="ml-2 text-gray-400 text-xs px-2 py-1 rounded border border-gray-700">{{ plan.difficulty|capitalize }}</span>
-                                    </div>
-                                    <p class="text-gray-300 mb-4 line-clamp-2">{{ plan.description }}</p>
-                                    <span class="inline-flex items-center text-gold-500 hover:text-gold-400">
-                                        View Plan <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                                    </span>
-                                </div>
-                            </a>
-                        {% endfor %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for exercise in exercises %}
+        <div class="golden-card rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 reveal-on-scroll">
+            <div class="aspect-w-16 aspect-h-9 bg-gray-800">
+                {% if exercise.image_url %}
+                <img src="{{ exercise.image_url }}" alt="{{ exercise.name }}" class="object-cover w-full h-48">
+                {% else %}
+                <div class="w-full h-48 bg-gray-700 flex items-center justify-center">
+                    <span class="text-gray-500">Image not available</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2 golden-text">{{ exercise.name }}</h2>
+                <p class="text-gray-400 mb-4">{{ exercise.description }}</p>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Sets</h3>
+                        <p class="text-white">{{ exercise.sets }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Reps</h3>
+                        <p class="text-white">{{ exercise.reps }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Rest</h3>
+                        <p class="text-white">{{ exercise.rest }}</p>
                     </div>
                 </div>
-            {% endif %}
-            
-            <!-- Exercise List -->
-            <div>
-                <h2 class="text-2xl font-bold golden-text mb-6">{{ muscle_group|capitalize }} Exercises</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {% for exercise in exercises %}
-                        <div class="golden-card rounded-lg overflow-hidden">
-                            <div class="relative aspect-video">
-                                {% if exercise.image_url %}
-                                    <img src="{{ exercise.image_url }}" alt="{{ exercise.name }}" class="object-cover w-full h-full">
-                                {% else %}
-                                    <div class="w-full h-full bg-gray-800 flex items-center justify-center">
-                                        <i class="fas fa-dumbbell text-4xl text-gold-500"></i>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-gold-500 mb-2">{{ exercise.name }}</h3>
-                                <p class="text-gray-300 mb-4">{{ exercise.description }}</p>
-                                
-                                <div class="grid grid-cols-3 gap-2 mb-4">
-                                    <div class="bg-gray-800 rounded p-2 text-center">
-                                        <span class="block text-xs text-gray-400">Sets</span>
-                                        <span class="text-white font-bold">{{ exercise.sets }}</span>
-                                    </div>
-                                    <div class="bg-gray-800 rounded p-2 text-center">
-                                        <span class="block text-xs text-gray-400">Reps</span>
-                                        <span class="text-white font-bold">{{ exercise.reps }}</span>
-                                    </div>
-                                    <div class="bg-gray-800 rounded p-2 text-center">
-                                        <span class="block text-xs text-gray-400">Rest</span>
-                                        <span class="text-white font-bold">{{ exercise.rest }}</span>
-                                    </div>
-                                </div>
-                                
-                                {% if exercise.video_url %}
-                                    <button onclick="openVideoModal('{{ exercise.name }}', '{{ exercise.video_url }}')" 
-                                            class="w-full pixel-button flex items-center justify-center">
-                                        <i class="fas fa-play-circle mr-2"></i> Watch Demo
-                                    </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
+                {% if exercise.video_url %}
+                <div class="mt-4">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Demonstration</h3>
+                    <div class="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+                        <iframe src="{{ exercise.video_url }}" 
+                                class="w-full h-full" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
                 </div>
+                {% endif %}
             </div>
         </div>
+        {% endfor %}
     </div>
     
-    <!-- Video Modal -->
-    <div id="videoModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="fixed inset-0 bg-black opacity-80" onclick="closeVideoModal()"></div>
-        
-        <div class="bg-gray-900 rounded-lg w-full max-w-3xl mx-4 relative z-10 border border-gold-500">
-            <div class="p-4 flex justify-between items-center border-b border-gray-800">
-                <h3 id="videoTitle" class="text-xl font-bold text-gold-500"></h3>
-                <button onclick="closeVideoModal()" class="text-gray-400 hover:text-white">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="aspect-video bg-black">
-                <iframe id="videoFrame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
+    {% if not exercises %}
+    <div class="text-center py-12">
+        <p class="text-xl text-gray-400">No exercises found for {{ muscle_group }}. Check back later!</p>
     </div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    function openVideoModal(title, videoUrl) {
-        document.getElementById('videoTitle').innerText = title;
-        document.getElementById('videoFrame').src = videoUrl;
-        document.getElementById('videoModal').classList.remove('hidden');
-    }
+    {% endif %}
     
-    function closeVideoModal() {
-        document.getElementById('videoFrame').src = '';
-        document.getElementById('videoModal').classList.add('hidden');
-    }
-</script>
+    <div class="mt-8 text-center">
+        <a href="{{ url_for('exercise_plans') }}" class="pixel-button inline-block">Back to All Plans</a>
+    </div>
+</div>
 {% endblock %}
