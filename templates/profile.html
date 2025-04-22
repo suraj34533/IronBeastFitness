@@ -172,8 +172,6 @@
                 </div>
                 
                 <form method="POST" action="{{ url_for('update_profile') }}">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    
                     <div class="mb-4">
                         <label for="full_name" class="block text-gold-500 mb-1">Full Name</label>
                         <input type="text" id="full_name" name="full_name" value="{{ user_details.get('full_name', '') }}" 
