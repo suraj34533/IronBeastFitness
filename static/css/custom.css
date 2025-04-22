@@ -6,20 +6,27 @@ body {
     position: relative;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* Hero section styling */
+.hero-section {
+    background-color: #0f1114;
+    position: relative;
+}
+
+.hero-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-image {
     height: 100%;
-    z-index: -1;
-    background-image: url('/static/images/muscular-silhouette.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.25; /* Adjust the opacity as needed */
-    pointer-events: none;
+    width: 100%;
+    object-fit: contain;
+    object-position: center right;
+    opacity: 0.9;
+    filter: contrast(1.1);
+    mix-blend-mode: luminosity;
 }
 
 /* Golden text styling */
