@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block title %}IronBeast Gym - Transform Your Body, Elevate Your Mind{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <div class="hero-section bg-gray-900 py-16 md:py-20 lg:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content">
+            <div class="text-center md:text-left md:max-w-xl">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 shine-effect">
+                    FORGE YOUR BODY<br>
+                    <span class="text-gold-500">UNLEASH YOUR POTENTIAL</span>
+                </h1>
+                <p class="text-gray-300 text-lg md:text-xl mb-8">
+                    Join IronBeast and transform your physique with our cutting-edge training methods, expert nutritional guidance, and supportive community.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="{{ url_for('exercise_plans') }}" class="pixel-button inline-block">
+                        EXPLORE PLANS
+                    </a>
+                    <a href="{{ url_for('calculator') }}" class="pixel-button inline-block">
+                        CALCULATE CALORIES
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Features Section -->
+    <div class="py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">TRANSFORM WITH <span class="text-gold-500">IRONBEAST</span></h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Our comprehensive approach to fitness covers all aspects of your journey, from customized workout plans to scientifically-backed nutritional guidance.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gold-500 text-black mb-4">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold golden-text mb-2">Expert Exercise Plans</h3>
+                    <p class="text-gray-400">
+                        Carefully designed workout routines for all fitness levels, from beginners to advanced athletes, targeting specific goals like strength, hypertrophy, or endurance.
+                    </p>
+                    <a href="{{ url_for('exercise_plans') }}" class="mt-4 inline-flex items-center text-gold-500 hover:text-gold-400">
+                        Browse Plans <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: 0.2s;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gold-500 text-black mb-4">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold golden-text mb-2">Nutritional Guidance</h3>
+                    <p class="text-gray-400">
+                        Comprehensive diet plans tailored to your body type, goals, and preferences. Track your calories and macros to optimize your results.
+                    </p>
+                    <a href="{{ url_for('diet_plans') }}" class="mt-4 inline-flex items-center text-gold-500 hover:text-gold-400">
+                        Explore Diets <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gold-500 text-black mb-4">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold golden-text mb-2">Powerlifting Expertise</h3>
+                    <p class="text-gray-400">
+                        Specialized training programs for powerlifting enthusiasts. Master the squat, bench press, and deadlift with our technical guidance.
+                    </p>
+                    <a href="{{ url_for('powerlifting') }}" class="mt-4 inline-flex items-center text-gold-500 hover:text-gold-400">
+                        Start Powerlifting <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Calorie Calculator Promo -->
+    <div class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold golden-text mb-4">TRACK YOUR PROGRESS</h2>
+                    <p class="text-gray-300 mb-6">
+                        Understanding your caloric needs is crucial for any fitness goal. Our calculator helps you determine your daily calorie and protein requirements based on your body metrics and activity level.
+                    </p>
+                    <ul class="text-gray-300 mb-6 space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-gold-500 mr-2"></i>
+                            <span>Calculate your TDEE (Total Daily Energy Expenditure)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-gold-500 mr-2"></i>
+                            <span>Determine your optimal protein intake</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-gold-500 mr-2"></i>
+                            <span>Track your daily calories and macros</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-gold-500 mr-2"></i>
+                            <span>Adjust your diet based on your goals</span>
+                        </li>
+                    </ul>
+                    <a href="{{ url_for('calculator') }}" class="pixel-button inline-block">
+                        USE CALCULATOR
+                    </a>
+                </div>
+                <div class="md:w-1/2 md:pl-8">
+                    <div class="golden-card rounded-lg p-6">
+                        <div class="bg-black rounded-lg p-4 border border-gray-800">
+                            <h3 class="text-xl font-semibold golden-text mb-2 text-center">Sample Calculation</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Weight:</span>
+                                    <span class="text-gold-500">180 lbs</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Height:</span>
+                                    <span class="text-gold-500">5'10"</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Age:</span>
+                                    <span class="text-gold-500">30 years</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Activity Level:</span>
+                                    <span class="text-gold-500">Moderate</span>
+                                </div>
+                                <hr class="border-gray-700">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">TDEE:</span>
+                                    <span class="text-gold-500 font-bold">2,750 calories</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Protein Needs:</span>
+                                    <span class="text-gold-500 font-bold">144 - 216g</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Testimonials -->
+    <div class="py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">SUCCESS <span class="text-gold-500">STORIES</span></h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Don't just take our word for it. Hear from the IronBeast community who have transformed their bodies and lives with our programs.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 flex items-center justify-center text-black font-bold">
+                            JD
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold golden-text">John Doe</h4>
+                            <p class="text-sm text-gray-400">Lost 50 lbs in 6 months</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "IronBeast's workout plans and calorie calculator changed my life. I've never felt stronger or more confident. The powerlifting program took my strength to levels I never thought possible."
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 flex items-center justify-center text-black font-bold">
+                            JS
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold golden-text">Jane Smith</h4>
+                            <p class="text-sm text-gray-400">Gained 10 lbs of muscle</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "As a woman looking to build muscle, IronBeast provided the perfect plans without any of the typical fitness industry nonsense. The diet plans were easy to follow and delicious!"
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 flex items-center justify-center text-black font-bold">
+                            RP
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold golden-text">Robert Parker</h4>
+                            <p class="text-sm text-gray-400">Increased all lifts by 50%</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "The powerlifting program at IronBeast took my deadlift from 300 lbs to 450 lbs in just 8 months. The technical advice and progression scheme are second to none."
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star text-gold-500"></i>
+                        <i class="fas fa-star-half-alt text-gold-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold golden-text mb-4">READY TO TRANSFORM YOUR BODY?</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto mb-8">
+                Start your fitness journey today with IronBeast's proven programs, nutritional guidance, and powerful tools.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="{{ url_for('exercise_plans') }}" class="pixel-button inline-block">
+                    START WITH EXERCISES
+                </a>
+                <a href="{{ url_for('diet_plans') }}" class="pixel-button inline-block">
+                    EXPLORE DIET PLANS
+                </a>
+                <a href="{{ url_for('calculator') }}" class="pixel-button inline-block">
+                    CALCULATE YOUR NEEDS
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

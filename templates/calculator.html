@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title %}Calorie & Protein Calculator - IronBeast Gym{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+{% endblock %}
+
+{% block content %}
+    <!-- Calculator Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">CALORIE & MACRO CALCULATOR</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Determine your optimal caloric intake and macronutrient needs based on your body metrics, activity level, and fitness goals.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Calculator Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Two Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <!-- TDEE Calculator Column -->
+                <div>
+                    <div class="golden-card rounded-lg p-6">
+                        <h2 class="text-2xl font-bold golden-text mb-4">TDEE CALCULATOR</h2>
+                        <p class="text-gray-300 mb-6">
+                            Calculate your Total Daily Energy Expenditure (TDEE) to determine how many calories your body burns in a day, accounting for your activity level.
+                        </p>
+                        
+                        <form id="tdee-calculator" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="weight" class="block text-gold-500 mb-1">Weight (lbs)</label>
+                                    <input type="number" id="weight" name="weight" min="50" max="500" step="0.1" 
+                                           class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label for="height" class="block text-gold-500 mb-1">Height (cm)</label>
+                                    <input type="number" id="height" name="height" min="100" max="250" step="0.1" 
+                                           class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500" 
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="age" class="block text-gold-500 mb-1">Age (years)</label>
+                                    <input type="number" id="age" name="age" min="15" max="100" 
+                                           class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label for="gender" class="block text-gold-500 mb-1">Gender</label>
+                                    <select id="gender" name="gender" 
+                                            class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="activity-level" class="block text-gold-500 mb-1">Activity Level</label>
+                                <select id="activity-level" name="activity-level" 
+                                        class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500">
+                                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                                    <option value="light">Light (exercise 1-3 days/week)</option>
+                                    <option value="moderate">Moderate (exercise 3-5 days/week)</option>
+                                    <option value="active">Active (exercise 6-7 days/week)</option>
+                                    <option value="very_active">Very Active (intense exercise 6-7 days/week or physical job)</option>
+                                </select>
+                            </div>
+                            
+                            <div id="calculator-error" class="text-red-500 hidden"></div>
+                            
+                            <button type="submit" class="pixel-button w-full">
+                                CALCULATE
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Tracking Column -->
+                <div>
+                    <div class="golden-card rounded-lg p-6">
+                        <h2 class="text-2xl font-bold golden-text mb-4">TRACK YOUR INTAKE</h2>
+                        <p class="text-gray-300 mb-6">
+                            Record your daily calorie and protein intake to monitor your progress toward your fitness goals.
+                        </p>
+                        
+                        <form id="calorie-tracking-form" action="{{ url_for('calculator') }}" method="post" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="calories" class="block text-gold-500 mb-1">Calories Consumed</label>
+                                    <input type="number" id="calories" name="calories" min="0" max="10000" 
+                                           class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label for="protein" class="block text-gold-500 mb-1">Protein (grams)</label>
+                                    <input type="number" id="protein" name="protein" min="0" max="500" 
+                                           class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500" 
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="description" class="block text-gold-500 mb-1">Description (optional)</label>
+                                <textarea id="description" name="description" rows="3"
+                                          class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500"
+                                          placeholder="E.g., Breakfast, lunch, and dinner with post-workout shake"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="pixel-button w-full">
+                                SAVE ENTRY
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div id="calculator-results"></div>
+            
+            <!-- How It Works Section -->
+            <div class="mt-16">
+                <h2 class="text-2xl font-bold golden-text mb-8">HOW IT WORKS</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="golden-card rounded-lg p-5">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xl mb-4">1</div>
+                        <h3 class="text-lg font-semibold golden-text mb-2">Calculate Your TDEE</h3>
+                        <p class="text-gray-300">
+                            Your Total Daily Energy Expenditure is the total number of calories you burn in a day. This includes your Basal Metabolic Rate (BMR) and your activity level.
+                        </p>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg p-5">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xl mb-4">2</div>
+                        <h3 class="text-lg font-semibold golden-text mb-2">Determine Your Goal</h3>
+                        <p class="text-gray-300">
+                            Based on your fitness goals, adjust your caloric intake:
+                            <br>• Fat Loss: 300-500 calories below TDEE
+                            <br>• Muscle Gain: 300-500 calories above TDEE
+                            <br>• Maintenance: Eat at your TDEE
+                        </p>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg p-5">
+                        <div class="h-12 w-12 rounded-full bg-gold-500 text-black flex items-center justify-center font-bold text-xl mb-4">3</div>
+                        <h3 class="text-lg font-semibold golden-text mb-2">Track & Adjust</h3>
+                        <p class="text-gray-300">
+                            Monitor your progress by tracking your daily calorie and protein intake. Adjust as needed based on your results over time. Consistency is the key to success.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Macronutrient Breakdown -->
+            <div class="mt-16">
+                <h2 class="text-2xl font-bold golden-text mb-8">MACRONUTRIENT BREAKDOWN</h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Protein</h3>
+                            <p class="text-gray-300 mb-3">
+                                <span class="text-gold-500 font-bold">4 calories per gram</span>
+                            </p>
+                            <p class="text-gray-300">
+                                Essential for muscle repair and growth. The foundation of any fitness nutrition plan.
+                            </p>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Recommended Intake:</h4>
+                                <ul class="text-gray-300 list-disc pl-5 text-sm">
+                                    <li>Fat Loss: 1.0-1.2g per pound of bodyweight</li>
+                                    <li>Muscle Gain: 0.8-1.0g per pound of bodyweight</li>
+                                    <li>Maintenance: 0.8g per pound of bodyweight</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Good Sources:</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Chicken breast, lean beef, eggs, fish, greek yogurt, whey protein, tofu, lentils
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Carbohydrates</h3>
+                            <p class="text-gray-300 mb-3">
+                                <span class="text-gold-500 font-bold">4 calories per gram</span>
+                            </p>
+                            <p class="text-gray-300">
+                                Primary energy source for high-intensity training. Helps fuel workouts and replenish glycogen stores.
+                            </p>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Recommended Intake:</h4>
+                                <ul class="text-gray-300 list-disc pl-5 text-sm">
+                                    <li>Fat Loss: 0.5-1.0g per pound of bodyweight</li>
+                                    <li>Muscle Gain: 1.5-2.0g per pound of bodyweight</li>
+                                    <li>Maintenance: 1.0-1.5g per pound of bodyweight</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Good Sources:</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Rice, potatoes, oats, whole grain bread, quinoa, fruits, vegetables
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Fats</h3>
+                            <p class="text-gray-300 mb-3">
+                                <span class="text-gold-500 font-bold">9 calories per gram</span>
+                            </p>
+                            <p class="text-gray-300">
+                                Essential for hormone production, brain function, and nutrient absorption. More calorie-dense than protein or carbs.
+                            </p>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Recommended Intake:</h4>
+                                <ul class="text-gray-300 list-disc pl-5 text-sm">
+                                    <li>Fat Loss: 0.3-0.4g per pound of bodyweight</li>
+                                    <li>Muscle Gain: 0.4-0.5g per pound of bodyweight</li>
+                                    <li>Maintenance: 0.4-0.5g per pound of bodyweight</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-gold-500 mb-1">Good Sources:</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Avocados, nuts, olive oil, fatty fish, eggs, nut butters
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+{% endblock %}

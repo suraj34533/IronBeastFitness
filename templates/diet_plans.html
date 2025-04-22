@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block title %}Diet Plans - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Diet Plans Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">DIET PLANS</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Fuel your workouts and optimize your results with our specialized nutrition plans designed to support your fitness goals.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Plans Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {% if is_detail is defined and is_detail %}
+                <!-- Individual Plan Detail View -->
+                <div class="mb-8">
+                    <a href="{{ url_for('diet_plans') }}" class="text-gold-500 hover:text-gold-400 flex items-center mb-4">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to All Diet Plans
+                    </a>
+                    <div class="golden-card rounded-lg p-6">
+                        <h2 class="text-2xl font-bold golden-text mb-2">{{ plan.name }}</h2>
+                        <div class="flex flex-wrap items-center mb-4 text-sm">
+                            <span class="bg-gold-800 text-white px-3 py-1 rounded-full mr-2 mb-2">{{ plan.goal|capitalize }}</span>
+                        </div>
+                        <p class="text-gray-300 mb-6">{{ plan.description }}</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                                <h4 class="text-gray-400 text-sm mb-1">Daily Calories</h4>
+                                <p class="text-2xl golden-text">{{ plan.calories }}</p>
+                            </div>
+                            <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                                <h4 class="text-gray-400 text-sm mb-1">Protein</h4>
+                                <p class="text-2xl golden-text">{{ plan.protein }}g</p>
+                                <p class="text-xs text-gray-500">{{ (plan.protein * 4 / plan.calories * 100)|round|int }}% of calories</p>
+                            </div>
+                            <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                                <h4 class="text-gray-400 text-sm mb-1">Carbs</h4>
+                                <p class="text-2xl golden-text">{{ plan.carbs }}g</p>
+                                <p class="text-xs text-gray-500">{{ (plan.carbs * 4 / plan.calories * 100)|round|int }}% of calories</p>
+                            </div>
+                            <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                                <h4 class="text-gray-400 text-sm mb-1">Fats</h4>
+                                <p class="text-2xl golden-text">{{ plan.fats }}g</p>
+                                <p class="text-xs text-gray-500">{{ (plan.fats * 9 / plan.calories * 100)|round|int }}% of calories</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold golden-text mb-4">Sample Meal Plan</h3>
+                        
+                        <div class="space-y-6">
+                            {% for meal in meals %}
+                                <div class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+                                    <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                                        <h4 class="text-lg font-semibold golden-text mb-2 md:mb-0">{{ meal.name }}</h4>
+                                        <div class="flex space-x-3 text-sm">
+                                            <span class="bg-black px-2 py-1 rounded">{{ meal.calories }} cal</span>
+                                            <span class="bg-black px-2 py-1 rounded">P: {{ meal.protein }}g</span>
+                                            <span class="bg-black px-2 py-1 rounded">C: {{ meal.carbs }}g</span>
+                                            <span class="bg-black px-2 py-1 rounded">F: {{ meal.fats }}g</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 mt-3">{{ meal.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-800">
+                            <h3 class="text-xl font-semibold golden-text mb-4">Nutrition Tips</h3>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Stay hydrated by drinking at least 3-4 liters of water daily.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Eat every 3-4 hours to keep your metabolism active and energy levels stable.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Prioritize whole foods over processed options for better nutrient absorption.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Consume protein with each meal to support muscle recovery and growth.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Plan and prepare your meals in advance to ensure consistency.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- All Plans Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {% for plan in plans %}
+                        <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                            <h2 class="text-xl font-bold golden-text mb-2">{{ plan.name }}</h2>
+                            <div class="flex flex-wrap items-center mb-4 text-sm">
+                                <span class="bg-gold-800 text-white px-3 py-1 rounded-full mr-2 mb-2">{{ plan.goal|capitalize }}</span>
+                            </div>
+                            <p class="text-gray-300 mb-4">{{ plan.description }}</p>
+                            
+                            <div class="grid grid-cols-2 gap-2 mb-6">
+                                <div class="bg-gray-900 p-2 rounded text-center">
+                                    <span class="text-xs text-gray-400">Calories</span>
+                                    <p class="text-lg golden-text">{{ plan.calories }}</p>
+                                </div>
+                                <div class="bg-gray-900 p-2 rounded text-center">
+                                    <span class="text-xs text-gray-400">Protein</span>
+                                    <p class="text-lg golden-text">{{ plan.protein }}g</p>
+                                </div>
+                            </div>
+                            
+                            <a href="{{ url_for('diet_plan_detail', plan_id=plan.id) }}" class="pixel-button inline-block text-sm">
+                                VIEW DETAILS
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Nutrition Philosophy -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-bold text-center golden-text mb-8">OUR NUTRITION PHILOSOPHY</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="golden-card rounded-lg p-6">
+                            <h3 class="text-xl font-semibold golden-text mb-4">The Science of Nutrition</h3>
+                            <p class="text-gray-300 mb-4">
+                                At IronBeast, we believe that nutrition is the foundation of any successful fitness journey. Our diet plans are designed based on scientific principles, focusing on both macronutrients (proteins, carbs, fats) and micronutrients (vitamins, minerals).
+                            </p>
+                            <p class="text-gray-300">
+                                We don't believe in fad diets or extreme restrictions. Instead, we promote balanced, sustainable eating habits that you can maintain long-term while still enjoying your food.
+                            </p>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg p-6">
+                            <h3 class="text-xl font-semibold golden-text mb-4">How to Choose the Right Diet Plan</h3>
+                            <p class="text-gray-300 mb-4">
+                                Selecting the appropriate nutrition strategy depends on your specific goals, body type, and lifestyle. Here's a quick guide:
+                            </p>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-apple-alt text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Muscle Building:</strong> Caloric surplus with high protein intake</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-apple-alt text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Fat Loss:</strong> Moderate caloric deficit while maintaining adequate protein</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-apple-alt text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Maintenance:</strong> Balanced macros at your maintenance calorie level</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-apple-alt text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Performance:</strong> Carb-cycling based on training intensity</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Macro Calculator Promo -->
+                <div class="mt-16">
+                    <div class="golden-card rounded-lg p-6">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                            <div class="md:w-2/3">
+                                <h3 class="text-xl font-semibold golden-text mb-2">Need Help Calculating Your Macros?</h3>
+                                <p class="text-gray-300 mb-4">
+                                    Use our advanced calorie and macronutrient calculator to determine your personalized nutritional requirements based on your body metrics, activity level, and fitness goals.
+                                </p>
+                                <a href="{{ url_for('calculator') }}" class="pixel-button inline-block">
+                                    CALCULATE MY MACROS
+                                </a>
+                            </div>
+                            <div class="md:w-1/3 mt-6 md:mt-0 text-center">
+                                <i class="fas fa-calculator text-6xl text-gold-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-bold text-center golden-text mb-8">NUTRITION FAQs</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">How important is protein for muscle building?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    Protein is essential for muscle repair and growth. When you work out, you create micro-tears in your muscle fibers. Protein provides the amino acids needed to repair these tears, resulting in stronger, larger muscles. For optimal muscle building, aim for 1.6-2.2g of protein per kg of bodyweight daily, spread across multiple meals.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">Should I avoid carbs when trying to lose fat?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    No, carbs aren't the enemy. Fat loss occurs when you consume fewer calories than you burn, regardless of which macronutrients those calories come from. Carbs provide energy for workouts and help maintain hormone balance. Focus on quality carb sources (fruits, vegetables, whole grains) and timing them around your workouts for optimal results.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">How often should I eat for best results?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    Meal frequency is largely a matter of personal preference. What matters most is your total daily calorie and macronutrient intake. That said, many people find that eating 3-5 meals per day helps maintain energy levels and makes it easier to consume adequate protein. Experiment to find what works best for your schedule and hunger patterns.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">Are cheat meals recommended?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    We prefer the term "planned higher-calorie meals" rather than "cheat meals." Including occasional flexible meals can improve adherence to your diet in the long run. However, these should be planned, not random, and should still fit within your overall weekly calorie targets. A good approach is to allocate about 10-20% of your weekly calories to more flexible food choices.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

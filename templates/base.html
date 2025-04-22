@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IronBeast Gym{% endblock %}</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    <!-- Tailwind CSS Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fefce8',
+                            100: '#fffbc1',
+                            200: '#fff68f',
+                            300: '#ffe950',
+                            400: '#ffda15',
+                            500: '#ffd700', /* Golden */
+                            600: '#e6a900',
+                            700: '#bf7c00',
+                            800: '#9c5e04',
+                            900: '#7e4b0c',
+                            950: '#432704',
+                        },
+                    },
+                    fontFamily: {
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                        display: ['"Russo One"', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-black text-gray-200 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-gray-900 border-b border-gold-500 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <!-- Logo and brand name -->
+                        <a href="/" class="flex items-center">
+                            <span class="logo-text golden-gradient text-xl md:text-2xl">IRON<span class="text-gold-500">BEAST</span></span>
+                        </a>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+                        <a href="/" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Home</a>
+                        <a href="{{ url_for('exercise_plans') }}" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Exercise Plans</a>
+                        <a href="{{ url_for('diet_plans') }}" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Diet Plans</a>
+                        <a href="{{ url_for('powerlifting') }}" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Powerlifting</a>
+                        <a href="{{ url_for('calculator') }}" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Calculator</a>
+                        <a href="{{ url_for('hints') }}" class="px-3 py-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Hints & Support</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="flex items-center sm:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu, show/hide based on menu state -->
+        <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Home</a>
+                <a href="{{ url_for('exercise_plans') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Exercise Plans</a>
+                <a href="{{ url_for('diet_plans') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Diet Plans</a>
+                <a href="{{ url_for('powerlifting') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Powerlifting</a>
+                <a href="{{ url_for('calculator') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Calculator</a>
+                <a href="{{ url_for('hints') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Hints & Support</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                {% for category, message in messages %}
+                    <div class="p-4 mb-4 {% if category == 'success' %}bg-green-800{% elif category == 'error' %}bg-red-800{% else %}bg-gold-800{% endif %} text-white rounded-lg flex justify-between items-center">
+                        <span>{{ message }}</span>
+                        <button onclick="this.parentElement.remove()" class="text-white hover:text-gray-300 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gold-500 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="flex items-center">
+                        <span class="logo-text golden-gradient text-xl md:text-2xl">IRON<span class="text-gold-500">BEAST</span></span>
+                    </a>
+                    <p class="mt-2 text-gray-400 max-w-md">
+                        Transforming bodies and minds since 2023. IronBeast is dedicated to helping you achieve your fitness goals with science-backed methods.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+                    <div>
+                        <h3 class="text-gold-500 font-bold mb-4">Resources</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="{{ url_for('exercise_plans') }}" class="text-gray-400 hover:text-gold-500 transition duration-150">Exercise Plans</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('diet_plans') }}" class="text-gray-400 hover:text-gold-500 transition duration-150">Diet Plans</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('powerlifting') }}" class="text-gray-400 hover:text-gold-500 transition duration-150">Powerlifting</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-gold-500 font-bold mb-4">Tools</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="{{ url_for('calculator') }}" class="text-gray-400 hover:text-gold-500 transition duration-150">Calorie Calculator</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('hints') }}" class="text-gray-400 hover:text-gold-500 transition duration-150">Hints & Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-span-2 sm:col-span-1">
+                        <h3 class="text-gold-500 font-bold mb-4">Contact</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-envelope mr-2 text-gold-500"></i>
+                                <span class="text-gray-400">contact@ironbeast.com</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-phone mr-2 text-gold-500"></i>
+                                <span class="text-gray-400">+1 (555) 123-4567</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2 text-gold-500"></i>
+                                <span class="text-gray-400">123 Fitness Street, Muscle City</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-6 border-gray-800">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2023 IronBeast Gym. Owned by Arunava Saha. All rights reserved.</p>
+                
+                <div class="flex mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="text-gold-500 hover:text-white">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gold-500 hover:text-white">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gold-500 hover:text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gold-500 hover:text-white">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

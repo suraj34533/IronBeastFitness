@@ -1,0 +1,682 @@
+{% extends 'base.html' %}
+
+{% block title %}Hints & Support - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Hints Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">HINTS & SUPPORT</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Expert guidance, training tips, and nutritional advice to optimize your fitness journey and avoid common pitfalls.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Hints & Support Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Categories Navigation -->
+            <div class="mb-8 flex flex-wrap justify-center gap-4">
+                <a href="#training-tips" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    Training Tips
+                </a>
+                <a href="#nutrition-guidance" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    Nutrition Guidance
+                </a>
+                <a href="#recovery" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    Recovery & Rest
+                </a>
+                <a href="#motivation" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    Motivation
+                </a>
+                <a href="#common-mistakes" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    Common Mistakes
+                </a>
+                <a href="#workout-faqs" class="px-4 py-2 bg-gray-900 text-gold-500 hover:bg-gray-800 rounded-full transition duration-150">
+                    FAQs
+                </a>
+            </div>
+            
+            <!-- Training Tips Section -->
+            <div id="training-tips" class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-dumbbell mr-3 text-gold-500"></i>TRAINING TIPS
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">Programming Fundamentals</h3>
+                        
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Progressive Overload</h4>
+                                    <p class="text-gray-300">Gradually increase the weight, frequency, or repetitions in your workouts over time. This is the foundation of all strength and muscle gains.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Training Splits</h4>
+                                    <p class="text-gray-300">Choose a split that works for your schedule and recovery ability:</p>
+                                    <ul class="text-gray-300 list-disc pl-5 mt-1">
+                                        <li>Full Body (3x/week) - Best for beginners</li>
+                                        <li>Upper/Lower (4x/week) - Great for intermediate lifters</li>
+                                        <li>Push/Pull/Legs (6x/week) - Good for advanced trainees</li>
+                                        <li>Body Part Splits - More suitable for bodybuilding focus</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Exercise Selection</h4>
+                                    <p class="text-gray-300">Prioritize compound movements (squats, deadlifts, bench press, rows, pull-ups) that engage multiple muscle groups. Supplement with isolation exercises to target specific weaknesses.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Rep Ranges</h4>
+                                    <p class="text-gray-300">Different rep ranges serve different purposes:</p>
+                                    <ul class="text-gray-300 list-disc pl-5 mt-1">
+                                        <li>1-5 reps: Emphasizes strength</li>
+                                        <li>6-12 reps: Balanced for strength and hypertrophy</li>
+                                        <li>12-20 reps: Emphasizes hypertrophy and endurance</li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">Form & Technique</h3>
+                        
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Prioritize Form Over Weight</h4>
+                                    <p class="text-gray-300">Never sacrifice technique for heavier weights. Proper form ensures you're targeting the intended muscles and reduces injury risk.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Full Range of Motion</h4>
+                                    <p class="text-gray-300">Complete exercises through their full range of motion to maximize muscle recruitment and growth stimulus.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Mind-Muscle Connection</h4>
+                                    <p class="text-gray-300">Focus on feeling the target muscle working during each exercise. This improves activation and development.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Tempo Control</h4>
+                                    <p class="text-gray-300">Control both the concentric (lifting) and eccentric (lowering) portions of each rep. A common tempo is 2-0-2 (2 seconds down, no pause, 2 seconds up).</p>
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gold-400">Warm-Up Properly</h4>
+                                    <p class="text-gray-300">Begin each workout with 5-10 minutes of light cardio followed by dynamic stretching and lighter warm-up sets of your first exercises.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nutrition Guidance Section -->
+            <div id="nutrition-guidance" class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-apple-alt mr-3 text-gold-500"></i>NUTRITION GUIDANCE
+                </h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Diet Fundamentals</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Energy Balance</h4>
+                                        <p class="text-gray-300">Weight management is governed by calories in vs. calories out:</p>
+                                        <ul class="text-gray-300 list-disc pl-5 mt-1">
+                                            <li>To lose weight: Caloric deficit (eat less than you burn)</li>
+                                            <li>To gain weight: Caloric surplus (eat more than you burn)</li>
+                                            <li>To maintain weight: Caloric balance (eat what you burn)</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Protein Importance</h4>
+                                        <p class="text-gray-300">Prioritize protein intake (0.8-1.2g per pound of bodyweight) to support muscle recovery and growth. Spread protein intake throughout the day.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Food Quality</h4>
+                                        <p class="text-gray-300">While calories determine weight changes, food quality impacts health, performance, and satiety. Focus on whole, minimally processed foods for most of your diet.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Practical Strategies</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Meal Timing</h4>
+                                        <p class="text-gray-300">Eat a protein-rich meal within 1-2 hours of training. Space meals 3-4 hours apart to maintain stable energy and minimize hunger.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Hydration</h4>
+                                        <p class="text-gray-300">Aim for at least 3-4 liters of water daily. Dehydration by even 2% can decrease performance by up to 20%.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Supplements Worth Considering</h4>
+                                        <ul class="text-gray-300 list-disc pl-5 mt-1">
+                                            <li>Protein powder: Convenient for meeting protein targets</li>
+                                            <li>Creatine monohydrate: Well-researched for strength and power</li>
+                                            <li>Vitamin D: Important if limited sun exposure</li>
+                                            <li>Omega-3 fatty acids: For inflammation control and joint health</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Meal Prep</h4>
+                                        <p class="text-gray-300">Prepare meals in advance to ensure you have healthy options available, especially during busy periods.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recovery Section -->
+            <div id="recovery" class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-bed mr-3 text-gold-500"></i>RECOVERY & REST
+                </h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <p class="text-gray-300 mb-6">
+                        Muscles don't grow during workouts—they grow during recovery. Optimize your recovery to maximize your results.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Sleep Optimization</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Aim for 7-9 hours of quality sleep nightly</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Maintain a consistent sleep schedule</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Create a dark, cool sleeping environment</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Avoid screens 1 hour before bedtime</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Limit caffeine after mid-afternoon</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Active Recovery</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Include 1-2 active recovery days weekly</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Light walking or cycling (30-60 minutes)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Mobility work and dynamic stretching</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Yoga or light swimming</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Increases blood flow without fatigue</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800">
+                            <h3 class="text-lg font-semibold golden-text mb-3">Recovery Techniques</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Foam rolling for myofascial release</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Static stretching for tight muscles</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Contrast showers (alternating hot/cold)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Massage therapy when possible</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold-500 mt-1 mr-2"></i>
+                                    <span>Stress management techniques</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-800">
+                        <h3 class="text-lg font-semibold golden-text mb-2">Signs of Overtraining</h3>
+                        <p class="text-gray-300 mb-4">
+                            Learn to recognize these warning signs that indicate you need more recovery:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="text-gray-300 space-y-1 list-disc pl-5">
+                                <li>Persistent fatigue and decreased performance</li>
+                                <li>Elevated resting heart rate</li>
+                                <li>Increased susceptibility to illness</li>
+                                <li>Disturbed sleep patterns</li>
+                            </ul>
+                            <ul class="text-gray-300 space-y-1 list-disc pl-5">
+                                <li>Chronic muscle soreness that doesn't improve</li>
+                                <li>Mood changes, irritability, or depression</li>
+                                <li>Loss of motivation and enthusiasm</li>
+                                <li>Plateaued or declining strength gains</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Motivation Section -->
+            <div id="motivation" class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-fire mr-3 text-gold-500"></i>MOTIVATION & CONSISTENCY
+                </h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Building Lasting Habits</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Start Small</h4>
+                                        <p class="text-gray-300">Begin with achievable goals and build momentum. Three workouts per week consistently is better than six workouts that you can't maintain.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Track Your Progress</h4>
+                                        <p class="text-gray-300">Keep a workout journal or use an app to record your lifts, measurements, and photos. Seeing progress is incredibly motivating.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">The "Two-Day Rule"</h4>
+                                        <p class="text-gray-300">Never miss more than two consecutive days of training. This helps prevent short breaks from becoming permanent ones.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Have a Plan</h4>
+                                        <p class="text-gray-300">Know exactly what you'll do before entering the gym. Following a structured program removes decision fatigue.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Mental Strategies</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Find Your "Why"</h4>
+                                        <p class="text-gray-300">Identify deep, meaningful reasons for your fitness journey. Superficial motivations rarely sustain long-term efforts.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Embrace Discomfort</h4>
+                                        <p class="text-gray-300">Growth happens outside your comfort zone. Learn to welcome the challenge of difficult workouts as an opportunity for improvement.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Create Accountability</h4>
+                                        <p class="text-gray-300">Find a training partner, coach, or community. External accountability significantly increases adherence rates.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-gold-400">Reward System</h4>
+                                        <p class="text-gray-300">Create meaningful rewards for achieving milestones. Non-food rewards are best (new workout gear, experiences, etc.).</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-5 bg-gray-900 rounded-lg border border-gray-800">
+                        <h3 class="text-lg font-semibold golden-text mb-3">Motivation Boosters</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Create a motivating workout playlist that gets you energized.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Follow fitness accounts that inspire rather than discourage you.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Set performance goals (lift heavier, run faster) rather than just aesthetic ones.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Visualize your success and the feeling of accomplishing your goals.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Try new exercises or training styles periodically to prevent boredom.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-gold-500 mt-1 mr-2"></i>
+                                <p class="text-gray-300">Remember that motivation follows action—just start, and motivation will come.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Common Mistakes Section -->
+            <div id="common-mistakes" class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-gold-500"></i>COMMON MISTAKES
+                </h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <p class="text-gray-300 mb-6">
+                        Avoid these common pitfalls that can hinder your progress and lead to frustration or injury.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Training Mistakes</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Program Hopping</h4>
+                                        <p class="text-gray-300">Switching programs too frequently before giving them sufficient time to work. Stick with a program for at least 8-12 weeks.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Ego Lifting</h4>
+                                        <p class="text-gray-300">Using weights that are too heavy and sacrificing form. This increases injury risk and reduces effective muscle stimulus.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Neglecting Recovery</h4>
+                                        <p class="text-gray-300">Overtraining without adequate rest between sessions. Remember that muscles grow during recovery, not during workouts.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Poor Exercise Selection</h4>
+                                        <p class="text-gray-300">Focusing too much on isolation exercises and machines while neglecting fundamental compound movements.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Inconsistent Training</h4>
+                                        <p class="text-gray-300">Sporadic workout patterns rather than establishing a sustainable routine. Consistency trumps perfection.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold golden-text mb-4">Nutrition & Lifestyle Mistakes</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Extreme Calorie Restriction</h4>
+                                        <p class="text-gray-300">Severely cutting calories, which leads to muscle loss, metabolic adaptation, and rebound weight gain. Aim for moderate deficits (300-500 calories).</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Inadequate Protein</h4>
+                                        <p class="text-gray-300">Not consuming enough protein to support muscle recovery and growth. This limits results regardless of training quality.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Supplement Dependence</h4>
+                                        <p class="text-gray-300">Relying on supplements while neglecting fundamental nutrition principles. Supplements should complement, not replace, a solid diet.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Neglecting Sleep</h4>
+                                        <p class="text-gray-300">Chronically poor sleep quality or duration, which impairs recovery, hormone production, and training performance.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-red-400">Unrealistic Expectations</h4>
+                                        <p class="text-gray-300">Expecting rapid transformations and becoming discouraged when results don't match expectations. Real progress takes time and patience.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQs Section -->
+            <div id="workout-faqs">
+                <h2 class="text-2xl font-bold golden-text mb-8 flex items-center">
+                    <i class="fas fa-question-circle mr-3 text-gold-500"></i>FREQUENTLY ASKED QUESTIONS
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="golden-card rounded-lg">
+                        <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                            <span class="font-semibold golden-text">How quickly will I see results from working out?</span>
+                            <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="p-4 border-t border-gray-800 hidden">
+                            <p class="text-gray-300">
+                                You'll likely notice strength improvements within 2-3 weeks as your nervous system adapts. Visible physical changes typically begin around 6-8 weeks of consistent training and proper nutrition. However, timeline varies based on factors like training intensity, diet adherence, recovery quality, starting fitness level, and genetics. 
+                                
+                                The most dramatic transformations usually require 3-6 months or longer of dedicated effort. Focus on consistent progress rather than arbitrary timelines.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg">
+                        <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                            <span class="font-semibold golden-text">Should women train differently than men?</span>
+                            <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="p-4 border-t border-gray-800 hidden">
+                            <p class="text-gray-300">
+                                The fundamental principles of training are the same regardless of gender. Both men and women benefit from progressive overload, compound movements, and structured programming. The primary differences are in recovery needs and normal hormone levels, not in how exercises should be performed.
+                                
+                                Women can and should train with weights, including heavy weights, to build strength and improve body composition. The myth that women will "bulk up" from strength training is not supported by science—women typically have lower testosterone levels, making significant muscle growth more challenging, not easier.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg">
+                        <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                            <span class="font-semibold golden-text">Is it better to do cardio before or after weights?</span>
+                            <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="p-4 border-t border-gray-800 hidden">
+                            <p class="text-gray-300">
+                                For most people with strength or muscle-building goals, it's better to perform cardio after weight training or on separate days. Doing intense cardio before resistance training can fatigue your muscles and nervous system, reducing performance during your lifts and potentially limiting strength and hypertrophy gains.
+                                
+                                If you must combine them in one session, consider these options:
+                                <br>• Do weights first, followed by cardio
+                                <br>• Keep pre-lifting cardio brief (5-10 minutes) and low-intensity as a warm-up
+                                <br>• Separate cardio and weights by at least 6 hours (morning/evening split)
+                                <br>• Focus on low-impact cardio forms like cycling or elliptical
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg">
+                        <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                            <span class="font-semibold golden-text">What should I eat before and after workouts?</span>
+                            <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="p-4 border-t border-gray-800 hidden">
+                            <p class="text-gray-300">
+                                <strong>Pre-workout nutrition:</strong> Eat a balanced meal 2-3 hours before training, including protein and carbohydrates with moderate fat. If training fasted or it's been over 3 hours since your last meal, consider a smaller pre-workout snack about 30-60 minutes before, such as a banana with a scoop of peanut butter or Greek yogurt with berries.
+                                <br><br>
+                                <strong>Post-workout nutrition:</strong> Consume a meal or shake containing protein and carbohydrates within 2 hours after training. Aim for 20-40g of protein and 30-60g of carbohydrates, depending on your size and training intensity. Good options include a protein shake with fruit, chicken and rice, or Greek yogurt with fruit and granola.
+                                <br><br>
+                                The most important factor is meeting your total daily calorie and macronutrient needs, not precise timing. However, strategically timed pre/post workout meals can optimize performance and recovery.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg">
+                        <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                            <span class="font-semibold golden-text">How do I break through a plateau?</span>
+                            <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="p-4 border-t border-gray-800 hidden">
+                            <p class="text-gray-300">
+                                Plateaus are a normal part of training. Here are effective strategies to overcome them:
+                                <br><br>
+                                <strong>For strength plateaus:</strong>
+                                <br>• Deload for a week (reduce weight by 40-50%)
+                                <br>• Change rep ranges or implement periodization
+                                <br>• Add pause reps or implement tempo training
+                                <br>• Identify and strengthen weak points in the movement
+                                <br>• Consider microloading (smaller weight increases)
+                                <br><br>
+                                <strong>For physique plateaus:</strong>
+                                <br>• Reassess calorie intake (may need adjustment)
+                                <br>• Change training split or exercise selection
+                                <br>• Increase training volume or frequency
+                                <br>• Improve sleep quality and stress management
+                                <br>• Consider diet breaks or refeeds if in a prolonged deficit
+                                <br><br>
+                                Most importantly, ensure you're tracking your progress accurately and be patient—sometimes what feels like a plateau is simply a period of slower progress.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

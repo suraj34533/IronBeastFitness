@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Page Not Found - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <div class="bg-black py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-6xl font-bold golden-text mb-6">404</h1>
+            <h2 class="text-3xl font-bold golden-text mb-8">PAGE NOT FOUND</h2>
+            
+            <div class="golden-card rounded-lg p-6 max-w-2xl mx-auto">
+                <p class="text-gray-300 mb-6">
+                    Looks like this page went missing during its workout. Maybe it's doing extra reps somewhere else?
+                </p>
+                
+                <div class="mb-8">
+                    <i class="fas fa-dumbbell text-8xl text-gold-500"></i>
+                </div>
+                
+                <p class="text-gray-300 mb-8">
+                    Don't worry, you can still find plenty of strength and gains on our other pages. Use the navigation menu or the button below to get back on track.
+                </p>
+                
+                <a href="{{ url_for('index') }}" class="pixel-button inline-block">
+                    RETURN HOME
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

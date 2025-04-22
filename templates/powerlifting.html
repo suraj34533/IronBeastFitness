@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+
+{% block title %}Powerlifting - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Powerlifting Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">POWERLIFTING</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Master the art of strength with our specialized powerlifting programs and techniques for squat, bench press, and deadlift.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Powerlifting Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Plans Overview -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8">POWERLIFTING PROGRAMS</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {% for plan in plans %}
+                        <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                            <h2 class="text-xl font-bold golden-text mb-2">{{ plan.name }}</h2>
+                            <div class="flex flex-wrap items-center mb-4 text-sm">
+                                <span class="bg-gold-800 text-white px-3 py-1 rounded-full mr-2 mb-2">{{ plan.category|capitalize }}</span>
+                                <span class="bg-gray-800 text-gray-200 px-3 py-1 rounded-full mb-2">{{ plan.difficulty|capitalize }}</span>
+                            </div>
+                            <p class="text-gray-300 mb-6">{{ plan.description }}</p>
+                            <a href="{{ url_for('exercise_plan_detail', plan_id=plan.id) }}" class="pixel-button inline-block text-sm">
+                                VIEW DETAILS
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- The Big Three -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8">THE BIG THREE LIFTS</h2>
+                
+                <!-- Tabs navigation -->
+                <div class="flex flex-wrap mb-6 border-b border-gray-800">
+                    <button class="exercise-tab px-4 py-2 bg-yellow-800 text-white rounded-t-lg mr-2 mb-2" data-target="squat">Squat</button>
+                    <button class="exercise-tab px-4 py-2 bg-gray-800 text-gray-300 rounded-t-lg mr-2 mb-2" data-target="bench">Bench Press</button>
+                    <button class="exercise-tab px-4 py-2 bg-gray-800 text-gray-300 rounded-t-lg mb-2" data-target="deadlift">Deadlift</button>
+                </div>
+                
+                <!-- Tab contents -->
+                <div id="squat" class="exercise-content">
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">The Squat: King of All Exercises</h3>
+                        <p class="text-gray-300 mb-6">
+                            The barbell back squat is considered by many to be the most effective compound exercise for building overall strength and muscle mass. It primarily targets the quadriceps, hamstrings, and glutes, while also engaging the core and lower back.
+                        </p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Proper Technique</h4>
+                            <ol class="space-y-2 text-gray-300 list-decimal pl-5">
+                                <li><strong class="text-gold-500">Setup:</strong> Position yourself under the bar with it resting across your traps (high bar) or rear delts (low bar). Grip the bar, unrack it, and step back.</li>
+                                <li><strong class="text-gold-500">Stance:</strong> Set your feet slightly wider than shoulder-width apart, toes pointed slightly outward.</li>
+                                <li><strong class="text-gold-500">Brace:</strong> Take a deep breath, brace your core, and keep your chest up.</li>
+                                <li><strong class="text-gold-500">Descent:</strong> Initiate by breaking at the hips and knees simultaneously. Descend until your thighs are at least parallel to the ground.</li>
+                                <li><strong class="text-gold-500">Bottom Position:</strong> Maintain a neutral spine, prevent excessive forward lean, and ensure knees track over your toes.</li>
+                                <li><strong class="text-gold-500">Ascent:</strong> Drive through your heels and midfoot, push your hips forward, and stand up explosively.</li>
+                                <li><strong class="text-gold-500">Lockout:</strong> Fully extend hips and knees without hyperextending your back.</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Common Mistakes</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li>Knees caving inward (valgus collapse)</li>
+                                <li>Heels coming off the ground</li>
+                                <li>Excessive forward lean</li>
+                                <li>Rounding the lower back</li>
+                                <li>Shallow depth (not reaching parallel)</li>
+                                <li>Looking down instead of maintaining a neutral neck position</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold golden-text mb-2">Programming for Strength Gains</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li><strong class="text-gold-500">Frequency:</strong> 2-3 times per week for optimal strength gains</li>
+                                <li><strong class="text-gold-500">Volume:</strong> 10-15 working sets per week across all sessions</li>
+                                <li><strong class="text-gold-500">Intensity:</strong> Mix of heavy (80-90% 1RM) and moderate (70-80% 1RM) work</li>
+                                <li><strong class="text-gold-500">Progression:</strong> Add 2.5-5kg/5-10lbs when you can complete all prescribed reps with good form</li>
+                                <li><strong class="text-gold-500">Variations:</strong> Front squats, pause squats, and safety bar squats can address weaknesses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="bench" class="exercise-content hidden">
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">The Bench Press: Upper Body Cornerstone</h3>
+                        <p class="text-gray-300 mb-6">
+                            The bench press is the premier upper body strength movement in powerlifting. It primarily targets the chest (pectoralis major), anterior deltoids, and triceps, while also engaging numerous stabilizer muscles.
+                        </p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Proper Technique</h4>
+                            <ol class="space-y-2 text-gray-300 list-decimal pl-5">
+                                <li><strong class="text-gold-500">Setup:</strong> Lie on the bench with your eyes under the bar. Feet flat on the ground, glutes and upper back tight against the bench.</li>
+                                <li><strong class="text-gold-500">Grip:</strong> Grip the bar slightly wider than shoulder-width. For powerlifting, most use a grip where forearms are vertical when the bar touches the chest.</li>
+                                <li><strong class="text-gold-500">Arch:</strong> Create a moderate arch in your lower back while keeping your butt on the bench.</li>
+                                <li><strong class="text-gold-500">Unrack:</strong> Take the bar out with straight arms, don't "lift" it out.</li>
+                                <li><strong class="text-gold-500">Lower:</strong> Lower the bar with control to your lower chest/sternum, maintaining tight shoulders.</li>
+                                <li><strong class="text-gold-500">Press:</strong> Press the bar in a slight diagonal path back toward your face, driving through the whole foot and engaging your lats.</li>
+                                <li><strong class="text-gold-500">Lockout:</strong> Fully extend the elbows without excessive shoulder movement.</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Common Mistakes</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li>Flaring the elbows too early (increasing shoulder stress)</li>
+                                <li>Bouncing the bar off the chest</li>
+                                <li>Losing tightness at the bottom position</li>
+                                <li>Inconsistent bar path</li>
+                                <li>Lifting hips off the bench</li>
+                                <li>Uneven lockout (one arm extending faster)</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold golden-text mb-2">Programming for Strength Gains</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li><strong class="text-gold-500">Frequency:</strong> 2-4 times per week for optimal progress</li>
+                                <li><strong class="text-gold-500">Volume:</strong> 12-20 working sets per week across all sessions</li>
+                                <li><strong class="text-gold-500">Intensity:</strong> Balance heavy (80-90% 1RM), moderate (70-80% 1RM), and lighter (60-70% 1RM) work</li>
+                                <li><strong class="text-gold-500">Progression:</strong> Smaller jumps (1-2.5kg/2.5-5lbs) compared to lower body lifts</li>
+                                <li><strong class="text-gold-500">Variations:</strong> Close-grip bench, spoto press (paused), floor press, and board press to target sticking points</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="deadlift" class="exercise-content hidden">
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">The Deadlift: Ultimate Strength Test</h3>
+                        <p class="text-gray-300 mb-6">
+                            The deadlift is often considered the purest test of strength - picking up a heavy weight from the ground. It primarily targets the posterior chain: hamstrings, glutes, lower back, and traps, while engaging nearly every muscle in the body as stabilizers.
+                        </p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Proper Technique (Conventional Deadlift)</h4>
+                            <ol class="space-y-2 text-gray-300 list-decimal pl-5">
+                                <li><strong class="text-gold-500">Setup:</strong> Stand with feet hip-width apart, toes straight or slightly turned out, bar over midfoot.</li>
+                                <li><strong class="text-gold-500">Grip:</strong> Hinge at the hips to reach down and grip the bar just outside your legs. Use mixed grip (one overhand, one underhand), hook grip, or straps for heavier lifts.</li>
+                                <li><strong class="text-gold-500">Starting Position:</strong> Drop hips until shins touch the bar, chest up, shoulders slightly in front of the bar, back flat.</li>
+                                <li><strong class="text-gold-500">Brace:</strong> Take a deep breath, create intra-abdominal pressure, and engage lats by "pulling the slack out" of the bar.</li>
+                                <li><strong class="text-gold-500">Initial Pull:</strong> Begin the lift by pushing through the floor with your legs while maintaining a rigid torso angle.</li>
+                                <li><strong class="text-gold-500">Mid-Range:</strong> Once the bar passes the knees, drive hips forward aggressively while maintaining back tightness.</li>
+                                <li><strong class="text-gold-500">Lockout:</strong> Stand tall with shoulders back, glutes squeezed, and knees locked.</li>
+                                <li><strong class="text-gold-500">Descent:</strong> Hinge at the hips first, then bend knees once the bar passes them, maintaining a neutral spine throughout.</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold golden-text mb-2">Common Mistakes</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li>Rounding the lower back (flexion)</li>
+                                <li>Starting with the bar too far from the body</li>
+                                <li>Jerking the weight off the floor</li>
+                                <li>Dropping hips too low (turning it into a squat)</li>
+                                <li>Not engaging the lats (allowing the bar to drift forward)</li>
+                                <li>Hyperextending at lockout</li>
+                                <li>Looking up excessively (cervical hyperextension)</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold golden-text mb-2">Programming for Strength Gains</h4>
+                            <ul class="space-y-2 text-gray-300 list-disc pl-5">
+                                <li><strong class="text-gold-500">Frequency:</strong> 1-2 times per week (typically less than squat/bench due to higher recovery demands)</li>
+                                <li><strong class="text-gold-500">Volume:</strong> 8-12 working sets per week across all sessions</li>
+                                <li><strong class="text-gold-500">Intensity:</strong> Mix of heavy singles/doubles/triples (80-90% 1RM) and moderate sets of 4-6 reps (70-80% 1RM)</li>
+                                <li><strong class="text-gold-500">Progression:</strong> Add 2.5-5kg/5-10lbs when you can complete all prescribed reps with good form</li>
+                                <li><strong class="text-gold-500">Variations:</strong> Sumo deadlift, deficit deadlift, block pulls, Romanian deadlifts to target specific weaknesses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strength Standards -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold golden-text mb-8">POWERLIFTING STRENGTH STANDARDS</h2>
+                
+                <div class="golden-card rounded-lg p-6">
+                    <p class="text-gray-300 mb-6">
+                        These standards provide general guidelines for strength levels in the three main powerlifting movements. Remember that these are just benchmarks - everyone's journey is different and your own progress is what matters most.
+                    </p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-gray-900">
+                                    <th class="px-4 py-2 text-left text-gold-500 border-b border-gray-800">Level</th>
+                                    <th class="px-4 py-2 text-center text-gold-500 border-b border-gray-800">Beginner</th>
+                                    <th class="px-4 py-2 text-center text-gold-500 border-b border-gray-800">Novice</th>
+                                    <th class="px-4 py-2 text-center text-gold-500 border-b border-gray-800">Intermediate</th>
+                                    <th class="px-4 py-2 text-center text-gold-500 border-b border-gray-800">Advanced</th>
+                                    <th class="px-4 py-2 text-center text-gold-500 border-b border-gray-800">Elite</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-300">
+                                <!-- Men's Standards (Based on bodyweight ratio) -->
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold border-b border-gray-800" colspan="6">Men (as multiple of bodyweight)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Squat</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.5x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.5x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">3.0x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Bench</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">0.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.5x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.0x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Deadlift</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.25x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.25x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">3.25x</td>
+                                </tr>
+                                
+                                <!-- Women's Standards (Based on bodyweight ratio) -->
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold border-b border-gray-800" colspan="6">Women (as multiple of bodyweight)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Squat</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">0.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.5x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.25x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Bench</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">0.5x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">0.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.25x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.5x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 text-left border-b border-gray-800">Deadlift</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.25x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">1.75x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.0x</td>
+                                    <td class="px-4 py-2 text-center border-b border-gray-800">2.5x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mt-4">
+                        * These standards are approximate and based on one-rep maximums (1RM) for raw lifters without supportive equipment.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Powerlifting Equipment -->
+            <div>
+                <h2 class="text-2xl font-bold golden-text mb-8">ESSENTIAL POWERLIFTING EQUIPMENT</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">Basic Equipment</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Lifting Belt</span>
+                                    <p class="text-sm text-gray-400">Provides core support and increases intra-abdominal pressure. Choose a 10-13mm thick, 4" wide leather or lever belt for maximum support.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Wrist Wraps</span>
+                                    <p class="text-sm text-gray-400">Provide wrist support during heavy bench pressing. Stiffer wraps offer more support but less comfort.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Lifting Chalk</span>
+                                    <p class="text-sm text-gray-400">Improves grip by absorbing moisture. Essential for heavy deadlifts.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Flat Sole Shoes</span>
+                                    <p class="text-sm text-gray-400">Converse Chuck Taylors or dedicated lifting shoes provide a stable platform for deadlifts.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Knee Sleeves</span>
+                                    <p class="text-sm text-gray-400">Provide joint warmth and mild support during squats. 7mm neoprene sleeves are standard.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="golden-card rounded-lg p-6">
+                        <h3 class="text-xl font-semibold golden-text mb-4">Advanced Equipment</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Weightlifting Shoes</span>
+                                    <p class="text-sm text-gray-400">Elevated heel helps maintain proper position during squats. Essential for those with limited ankle mobility.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Deadlift Socks</span>
+                                    <p class="text-sm text-gray-400">Protect shins from barbell scrapes during deadlifts.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Lifting Straps</span>
+                                    <p class="text-sm text-gray-400">Aid grip during high-volume deadlift training (not allowed in competition).</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Singlet</span>
+                                    <p class="text-sm text-gray-400">Required for powerlifting competitions. Allows judges to see proper depth in squats.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span class="font-semibold">Knee Wraps</span>
+                                    <p class="text-sm text-gray-400">Provide significant support and increased rebound in squats (primarily used in equipped divisions).</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize the tabs on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // This functionality is already handled in main.js
+        // Just ensuring it's properly initialized
+    });
+</script>
+{% endblock %}

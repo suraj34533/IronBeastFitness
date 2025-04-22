@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block title %}Exercise Plans - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Exercise Plans Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">EXERCISE PLANS</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Scientifically designed workout plans to help you achieve your fitness goals, whether it's building muscle, losing fat, or improving performance.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Plans Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {% if is_detail is defined and is_detail %}
+                <!-- Individual Plan Detail View -->
+                <div class="mb-8">
+                    <a href="{{ url_for('exercise_plans') }}" class="text-gold-500 hover:text-gold-400 flex items-center mb-4">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to All Plans
+                    </a>
+                    <div class="golden-card rounded-lg p-6">
+                        <h2 class="text-2xl font-bold golden-text mb-2">{{ plan.name }}</h2>
+                        <div class="flex flex-wrap items-center mb-4 text-sm">
+                            <span class="bg-gold-800 text-white px-3 py-1 rounded-full mr-2 mb-2">{{ plan.category|capitalize }}</span>
+                            <span class="bg-gray-800 text-gray-200 px-3 py-1 rounded-full mb-2">{{ plan.difficulty|capitalize }}</span>
+                        </div>
+                        <p class="text-gray-300 mb-6">{{ plan.description }}</p>
+                        
+                        <h3 class="text-xl font-semibold golden-text mb-4">Exercises</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {% for exercise in exercises %}
+                                <div class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+                                    <h4 class="font-semibold golden-text mb-2">{{ exercise.name }}</h4>
+                                    <p class="text-gray-400 text-sm mb-3">{{ exercise.description }}</p>
+                                    <div class="grid grid-cols-3 gap-2 text-sm">
+                                        <div class="bg-black p-2 rounded">
+                                            <span class="text-gray-500">Sets</span>
+                                            <p class="text-gold-500">{{ exercise.sets }}</p>
+                                        </div>
+                                        <div class="bg-black p-2 rounded">
+                                            <span class="text-gray-500">Reps</span>
+                                            <p class="text-gold-500">{{ exercise.reps }}</p>
+                                        </div>
+                                        <div class="bg-black p-2 rounded">
+                                            <span class="text-gray-500">Rest</span>
+                                            <p class="text-gold-500">{{ exercise.rest }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-800">
+                            <h3 class="text-xl font-semibold golden-text mb-4">Training Tips</h3>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Warm up properly before each workout with 5-10 minutes of light cardio and dynamic stretching.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Focus on proper form rather than lifting heavy weights with poor technique.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Progressive overload is key - gradually increase the weight, reps, or sets over time.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Rest at least 48 hours between training the same muscle group.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-gold-500 mt-1 mr-2"></i>
+                                    <span>Track your workouts to ensure progression and stay motivated.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- All Plans Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {% for plan in plans %}
+                        <div class="golden-card rounded-lg p-6 animate-on-scroll opacity-0" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                            <h2 class="text-xl font-bold golden-text mb-2">{{ plan.name }}</h2>
+                            <div class="flex flex-wrap items-center mb-4 text-sm">
+                                <span class="bg-gold-800 text-white px-3 py-1 rounded-full mr-2 mb-2">{{ plan.category|capitalize }}</span>
+                                <span class="bg-gray-800 text-gray-200 px-3 py-1 rounded-full mb-2">{{ plan.difficulty|capitalize }}</span>
+                            </div>
+                            <p class="text-gray-300 mb-6">{{ plan.description }}</p>
+                            <a href="{{ url_for('exercise_plan_detail', plan_id=plan.id) }}" class="pixel-button inline-block text-sm">
+                                VIEW DETAILS
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Training Philosophy -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-bold text-center golden-text mb-8">OUR TRAINING PHILOSOPHY</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="golden-card rounded-lg p-6">
+                            <h3 class="text-xl font-semibold golden-text mb-4">The Science Behind Our Plans</h3>
+                            <p class="text-gray-300 mb-4">
+                                At IronBeast, we believe in evidence-based training methods. Our exercise plans are designed using the latest research in exercise science, biomechanics, and sports performance.
+                            </p>
+                            <p class="text-gray-300">
+                                We focus on key principles such as progressive overload, specificity, variation, and recovery to ensure optimal results. Each plan is structured to provide the right stimulus for your goals while minimizing injury risk.
+                            </p>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg p-6">
+                            <h3 class="text-xl font-semibold golden-text mb-4">How to Choose the Right Plan</h3>
+                            <p class="text-gray-300 mb-4">
+                                Selecting the right exercise plan depends on your goals, experience level, available equipment, and time commitment. Here's how to decide:
+                            </p>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-dumbbell text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Strength:</strong> Focus on compound movements with heavy weights and lower reps</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-dumbbell text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Muscle Growth:</strong> Moderate weights with 8-12 reps per set and higher volume</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-dumbbell text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Endurance:</strong> Lighter weights with higher reps and shorter rest periods</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-dumbbell text-gold-500 mt-1 mr-2"></i>
+                                    <span><strong class="text-gold-500">Fat Loss:</strong> Circuit-style training with a mix of resistance and cardio</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-bold text-center golden-text mb-8">FREQUENTLY ASKED QUESTIONS</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">How often should I work out?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    For optimal results, most people should train 3-5 times per week. Beginners might start with 3 full-body workouts, while more advanced lifters often benefit from 4-6 sessions with a split routine. Always ensure you're getting adequate recovery between sessions.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">How long before I see results?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    You'll typically feel differences (increased energy, better mood) within 1-2 weeks. Visual changes usually become noticeable after 4-6 weeks of consistent training and proper nutrition. Significant transformations generally require 3-6 months or more of dedicated effort.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">Should I do cardio with weight training?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    Combining cardio and weights can be beneficial for overall fitness and fat loss. For optimal results, separate your cardio and weight training sessions (different days or times of day), or do cardio after weights, not before. If building maximum muscle or strength is your primary goal, limit cardio to 2-3 moderate sessions per week.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="golden-card rounded-lg">
+                            <button class="faq-button w-full p-4 text-left flex justify-between items-center">
+                                <span class="font-semibold golden-text">Can I modify the plans for my needs?</span>
+                                <svg class="h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="p-4 border-t border-gray-800 hidden">
+                                <p class="text-gray-300">
+                                    Absolutely! Our plans provide a solid foundation, but they can and should be modified based on your equipment availability, time constraints, and any physical limitations you may have. Focus on maintaining the core principles while adapting the specific exercises as needed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
