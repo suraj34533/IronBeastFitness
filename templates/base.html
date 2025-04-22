@@ -73,6 +73,26 @@
                     </div>
                 </div>
                 
+                <!-- Auth buttons/User info -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    {% if current_user.is_authenticated %}
+                        <div class="relative group">
+                            <button class="flex items-center space-x-2 text-gold-500 hover:text-white focus:outline-none">
+                                <span>{{ current_user.username }}</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-800 rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800">My Workouts</a>
+                                <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800">Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="px-4 py-2 rounded-md text-white bg-gold-700 hover:bg-gold-600 transition duration-150">Login</a>
+                        <a href="{{ url_for('register') }}" class="px-4 py-2 rounded-md border border-gold-500 text-gold-500 hover:bg-gray-800 transition duration-150">Register</a>
+                    {% endif %}
+                </div>
+                
                 <!-- Mobile menu button -->
                 <div class="flex items-center sm:hidden">
                     <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gold-500 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
@@ -92,6 +112,19 @@
                 <a href="{{ url_for('powerlifting') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Powerlifting</a>
                 <a href="{{ url_for('calculator') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Calculator</a>
                 <a href="{{ url_for('hints') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Hints & Support</a>
+            </div>
+            
+            <!-- Mobile Auth Links -->
+            <div class="px-2 pt-2 pb-3 border-t border-gray-800">
+                {% if current_user.is_authenticated %}
+                    <div class="px-3 py-2 text-gold-500 font-medium">{{ current_user.username }}</div>
+                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 transition duration-150">Profile</a>
+                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 transition duration-150">My Workouts</a>
+                    <a href="{{ url_for('logout') }}" class="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 transition duration-150">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="block px-3 py-2 text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Login</a>
+                    <a href="{{ url_for('register') }}" class="block px-3 py-2 text-gold-500 hover:text-white hover:bg-gray-800 transition duration-150">Register</a>
+                {% endif %}
             </div>
         </div>
     </nav>

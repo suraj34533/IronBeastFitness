@@ -1,6 +1,9 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify, session
-from app import app, db
+from flask_login import login_user, logout_user, login_required, current_user
+from app import app, db, mongo
 from models import ExercisePlan, Exercise, DietPlan, Meal, CalorieEntry, WorkoutLog, seed_data
+from auth import User
+from forms import LoginForm, RegistrationForm
 from datetime import datetime
 
 # Seed the database with initial data
@@ -118,3 +121,62 @@ def page_not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return render_template('500.html'), 500
+
+
+# Authentication routes
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        # Check if input is email or username
+        if '@' in form.username.data:
+            user = User.get_by_email(form.username.data)
+        else:
+            user = User.get_by_username(form.username.data)
+        
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            if next_page:
+                return redirect(next_page)
+            return redirect(url_for('index'))
+        else:
+            flash('Login failed. Please check your username/email and password.', 'error')
+    
+    return render_template('login.html', form=form)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User.register(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data
+        )
+        
+        if user:
+            flash(f'Account created for {form.username.data}! You can now log in.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Username or email already exists. Please try a different one.', 'error')
+    
+    return render_template('register.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('index'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    # For future implementation
+    return "Profile page - coming soon!"

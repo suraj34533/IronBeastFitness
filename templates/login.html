@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Login Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">LOGIN</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                Access your account to track your progress and get personalized workout recommendations.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Login Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="golden-card rounded-lg p-6">
+                <form method="POST" action="" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-6">
+                        {{ form.username.label(class="block text-gold-500 mb-1") }}
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-6">
+                        {{ form.password.label(class="block text-gold-500 mb-1") }}
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-6 flex items-center">
+                        {{ form.remember(class="golden-checkbox mr-2") }}
+                        {{ form.remember.label(class="text-gray-300") }}
+                    </div>
+                    
+                    <div class="mb-6">
+                        {{ form.submit }}
+                    </div>
+                    
+                    <div class="text-center text-gray-400">
+                        <p>Don't have an account? <a href="{{ url_for('register') }}" class="text-gold-500 hover:text-gold-400">Register here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
