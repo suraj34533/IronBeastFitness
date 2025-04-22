@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}Exercise Plans - IronBeast Gym{% endblock %}
+{% block title %}
+    {% if is_detail %}
+        {{ plan.name }} - IronBeast Gym
+    {% else %}
+        Exercise Plans - IronBeast Gym
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .muscle-group-badge {
+        display: inline-block;
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+        background-color: rgba(234, 179, 8, 0.8);
+        margin-right: 0.25rem;
+        margin-bottom: 0.25rem;
+        transition: background-color 0.2s;
+    }
+    
+    .muscle-group-badge:hover {
+        background-color: rgb(234, 179, 8);
+        cursor: pointer;
+    }
+    
+    .muscle-group-badge.selected {
+        background-color: #f59e0b;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
     <!-- Exercise Plans Header -->
@@ -16,6 +52,36 @@
     <!-- Plans Content -->
     <div class="bg-black py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Muscle Group Filter -->
+            {% if muscle_groups %}
+            <div class="mb-8 bg-gray-900 p-4 rounded-lg">
+                <h3 class="text-lg font-semibold golden-text mb-2">Filter by Muscle Group</h3>
+                <div class="flex flex-wrap">
+                    {% if is_detail %}
+                        <a href="{{ url_for('exercise_plan_detail', plan_id=plan.id) }}" class="muscle-group-badge {% if not selected_muscle_group %}selected{% endif %} mb-2 mr-2">
+                            All
+                        </a>
+                        {% for group in muscle_groups %}
+                            <a href="{{ url_for('exercise_plan_detail', plan_id=plan.id, muscle_group=group) }}" 
+                               class="muscle-group-badge {% if selected_muscle_group == group %}selected{% endif %} mb-2 mr-2">
+                                {{ group|capitalize }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <a href="{{ url_for('exercise_plans') }}" class="muscle-group-badge {% if not selected_muscle_group %}selected{% endif %} mb-2 mr-2">
+                            All
+                        </a>
+                        {% for group in muscle_groups %}
+                            <a href="{{ url_for('muscle_group_exercises', muscle_group=group) }}" 
+                               class="muscle-group-badge mb-2 mr-2">
+                                {{ group|capitalize }}
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
             {% if is_detail is defined and is_detail %}
                 <!-- Individual Plan Detail View -->
                 <div class="mb-8">

@@ -5,7 +5,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 from werkzeug.middleware.proxy_fix import ProxyFix
-from flask_pymongo import PyMongo
 from flask_login import LoginManager
 
 
@@ -17,16 +16,12 @@ class Base(DeclarativeBase):
 logging.basicConfig(level=logging.DEBUG)
 
 db = SQLAlchemy(model_class=Base)
-mongo = PyMongo()
 login_manager = LoginManager()
 
 # create the app
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)  # needed for url_for to generate with https
-
-# Configure MongoDB
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
 # Configure SQL database for existing models
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///ironbeast.db")
@@ -38,7 +33,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Initialize extensions
 db.init_app(app)
-mongo.init_app(app)
 login_manager.init_app(app)
 
 # Configure login manager

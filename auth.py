@@ -1,9 +1,12 @@
+# This file is deprecated and no longer used
+# We've moved authentication to use SQLAlchemy directly
+# Keeping this file for reference only
+
 import uuid
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import mongo, login_manager
-from bson.objectid import ObjectId
+from app import login_manager
 
 
 class User(UserMixin):

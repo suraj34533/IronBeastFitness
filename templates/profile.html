@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - IronBeast Gym{% endblock %}
+
+{% block content %}
+    <!-- Profile Header -->
+    <div class="bg-gray-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-center golden-text mb-2">MY PROFILE</h1>
+            <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto">
+                View and manage your personal information and fitness progress.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Profile Content -->
+    <div class="bg-black py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- User Information Card -->
+                <div class="lg:col-span-4">
+                    <div class="golden-card rounded-lg p-6 h-full">
+                        <div class="flex flex-col items-center mb-6">
+                            <div class="w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center mb-4 border-2 border-gold-500">
+                                <span class="text-5xl text-gold-500">{{ current_user.username[0].upper() }}</span>
+                            </div>
+                            <h2 class="text-2xl font-bold golden-text">{{ current_user.username }}</h2>
+                            <p class="text-gray-300">{{ current_user.email }}</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold golden-text mb-4">Personal Information</h3>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-sm text-gray-400">Full Name</p>
+                                    <p class="text-white">{{ user_details.get('full_name', 'Not set') }}</p>
+                                </div>
+                                
+                                <div>
+                                    <p class="text-sm text-gray-400">Phone Number</p>
+                                    <p class="text-white">{{ user_details.get('phone', 'Not set') }}</p>
+                                </div>
+                                
+                                <div>
+                                    <p class="text-sm text-gray-400">Member Since</p>
+                                    <p class="text-white">{{ current_user.created_at.strftime('%B %d, %Y') if current_user.created_at else 'Unknown' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="pixel-button w-full" onclick="openEditProfileModal()">Edit Profile</button>
+                    </div>
+                </div>
+                
+                <!-- Fitness Stats Card -->
+                <div class="lg:col-span-8">
+                    <div class="golden-card rounded-lg p-6 mb-8">
+                        <h3 class="text-xl font-bold golden-text mb-4">Fitness Dashboard</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Calorie Tracking -->
+                            <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="text-gold-500 font-bold">Calorie Intake</h4>
+                                    <i class="fas fa-fire text-gold-500"></i>
+                                </div>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <p class="text-3xl font-bold text-white">{{ stats.get('daily_calories', 0) }}</p>
+                                        <p class="text-gray-400 text-sm">Today</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xl font-bold text-gray-300">{{ stats.get('avg_calories', 0) }}</p>
+                                        <p class="text-gray-400 text-sm">Average</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Protein Tracking -->
+                            <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="text-gold-500 font-bold">Protein Intake</h4>
+                                    <i class="fas fa-drumstick-bite text-gold-500"></i>
+                                </div>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <p class="text-3xl font-bold text-white">{{ stats.get('daily_protein', 0) }}g</p>
+                                        <p class="text-gray-400 text-sm">Today</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xl font-bold text-gray-300">{{ stats.get('avg_protein', 0) }}g</p>
+                                        <p class="text-gray-400 text-sm">Average</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Workout Frequency -->
+                            <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="text-gold-500 font-bold">Workouts</h4>
+                                    <i class="fas fa-dumbbell text-gold-500"></i>
+                                </div>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <p class="text-3xl font-bold text-white">{{ stats.get('workouts_this_week', 0) }}</p>
+                                        <p class="text-gray-400 text-sm">This Week</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xl font-bold text-gray-300">{{ stats.get('total_workouts', 0) }}</p>
+                                        <p class="text-gray-400 text-sm">Total</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Workouts Card -->
+                    <div class="golden-card rounded-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold golden-text">Recent Workouts</h3>
+                            <a href="#" class="text-gold-500 hover:text-gold-400 text-sm">View All</a>
+                        </div>
+                        
+                        {% if recent_workouts %}
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="border-b border-gray-700">
+                                            <th class="py-3 text-left text-gray-400 text-xs">Date</th>
+                                            <th class="py-3 text-left text-gray-400 text-xs">Exercise</th>
+                                            <th class="py-3 text-left text-gray-400 text-xs">Sets x Reps</th>
+                                            <th class="py-3 text-left text-gray-400 text-xs">Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for workout in recent_workouts %}
+                                            <tr class="border-b border-gray-800">
+                                                <td class="py-3 text-white">{{ workout.date.strftime('%d %b %Y') }}</td>
+                                                <td class="py-3 text-white">{{ workout.exercise_name }}</td>
+                                                <td class="py-3 text-white">{{ workout.sets_completed }} x {{ workout.reps_per_set }}</td>
+                                                <td class="py-3 text-white">{{ workout.weight }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="text-center py-8">
+                                <p class="text-gray-400 mb-4">No workout logs yet. Start tracking your fitness journey!</p>
+                                <a href="#" class="pixel-button">Log Workout</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Profile Modal (Hidden by default) -->
+    <div id="editProfileModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="fixed inset-0 bg-black opacity-70" onclick="closeEditProfileModal()"></div>
+        
+        <div class="bg-gray-900 rounded-lg w-full max-w-md mx-4 relative z-10 border border-gold-500">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold golden-text">Edit Profile</h3>
+                    <button onclick="closeEditProfileModal()" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form method="POST" action="{{ url_for('update_profile') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    
+                    <div class="mb-4">
+                        <label for="full_name" class="block text-gold-500 mb-1">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" value="{{ user_details.get('full_name', '') }}" 
+                            class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gold-500 mb-1">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" value="{{ user_details.get('phone', '') }}" 
+                            class="w-full bg-gray-900 border border-gray-700 rounded-md py-2 px-3 text-white golden-input focus:border-gold-500">
+                    </div>
+                    
+                    <button type="submit" class="pixel-button w-full mt-6">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openEditProfileModal() {
+        document.getElementById('editProfileModal').classList.remove('hidden');
+    }
+    
+    function closeEditProfileModal() {
+        document.getElementById('editProfileModal').classList.add('hidden');
+    }
+</script>
+{% endblock %}
