@@ -1,199 +1,142 @@
-/* Custom CSS for IronBeast Gym Website */
+/* Custom CSS for IronBeast Gym */
 
-/* Golden Text Effect */
+/* Background image */
+body {
+    background-color: #000;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('/static/images/muscular-silhouette.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25; /* Adjust the opacity as needed */
+    pointer-events: none;
+}
+
+/* Golden text styling */
 .golden-text {
     color: #FFD700;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
-.golden-gradient {
-    background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
-}
-
-/* 3D Pixel Button */
-.pixel-button {
-    background-color: #1a1a1a;
-    color: #FFD700;
-    border: 2px solid #FFD700;
-    padding: 10px 20px;
-    font-family: 'Press Start 2P', cursive, system-ui;
-    text-transform: uppercase;
-    position: relative;
-    transition: all 0.2s ease;
-    box-shadow: 
-        0 4px 0 #996515,
-        0 5px 5px rgba(0, 0, 0, 0.5);
-    text-shadow: 2px 2px 0 #000;
-}
-
-.pixel-button:hover {
-    background-color: #333;
-    transform: translateY(2px);
-    box-shadow: 
-        0 2px 0 #996515,
-        0 3px 3px rgba(0, 0, 0, 0.5);
-}
-
-.pixel-button:active {
-    transform: translateY(4px);
-    box-shadow: none;
-}
-
-/* Card with golden border */
+/* Golden card styling */
 .golden-card {
-    background-color: #1a1a1a;
-    border: 2px solid #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 .golden-card:hover {
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.3);
-    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
-/* Shine effect for headings */
-@keyframes shine {
-    0% {
-        background-position: -100%;
-    }
-    100% {
-        background-position: 200%;
-    }
-}
-
-.shine-effect {
-    background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-}
-
-/* Hero section with gradient overlay */
-.hero-section {
+/* Pixel button */
+.pixel-button {
+    background-color: #FFD700;
+    color: #000;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
     position: relative;
-    background-color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
     overflow: hidden;
+    transition: all 0.3s;
+    border: 2px solid #FFD700;
+    box-shadow: 
+        3px 3px 0 0 rgba(0, 0, 0, 0.8),
+        -3px -3px 0 0 rgba(255, 255, 255, 0.2);
 }
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0.6) 100%);
-    z-index: 1;
+.pixel-button:hover {
+    background-color: #e5c100;
+    transform: translateY(1px);
+    box-shadow: 
+        2px 2px 0 0 rgba(0, 0, 0, 0.8),
+        -2px -2px 0 0 rgba(255, 255, 255, 0.2);
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
+.pixel-button:active {
+    transform: translateY(2px);
+    box-shadow: 
+        1px 1px 0 0 rgba(0, 0, 0, 0.8),
+        -1px -1px 0 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
+/* Golden input */
+.golden-input {
+    transition: all 0.3s ease;
 }
 
-::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #FFD700;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #B38728;
-}
-
-/* Golden input focus */
 .golden-input:focus {
-    border-color: #FFD700;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
-    outline: none;
+    border-color: #FFD700 !important;
+    box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.5) !important;
 }
 
-/* Progress bar with golden filling */
-.golden-progress {
-    height: 20px;
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    border: 1px solid #333;
-    overflow: hidden;
-}
-
-.golden-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #B38728 0%, #FBF5B7 50%, #AA771C 100%);
-    border-radius: 10px;
-    transition: width 0.5s ease;
-}
-
-/* Custom checkbox with golden check */
+/* Golden checkbox */
 .golden-checkbox {
     appearance: none;
-    width: 20px;
-    height: 20px;
-    background-color: #1a1a1a;
-    border: 2px solid #FFD700;
-    border-radius: 4px;
-    cursor: pointer;
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 0.25rem;
+    display: inline-block;
     position: relative;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
-.golden-checkbox:checked::before {
+.golden-checkbox:checked {
+    background-color: #FFD700;
+    border-color: #FFD700;
+}
+
+.golden-checkbox:checked::after {
     content: '✓';
+    font-size: 0.875rem;
+    color: #000;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #FFD700;
-    font-weight: bold;
+    top: 0;
+    left: 0.25rem;
+    line-height: 1.2;
 }
 
-/* Glowing effect for important elements */
-.glow-effect {
-    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
-    animation: glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
+/* Animation for scroll reveal */
+@keyframes fadeInUp {
     from {
-        box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Logo text styling */
-.logo-text {
-    font-family: 'Russo One', sans-serif, system-ui;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.animate-on-scroll {
+    animation: fadeInUp 0.5s ease forwards;
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-    .hero-content {
-        padding: 2rem 1rem;
-    }
-    
     .pixel-button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .golden-card {
-        margin-bottom: 1rem;
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
     }
 }
